@@ -1,0 +1,17 @@
+<%- include('./partials/header') %>
+    <div class="container mt-5">
+        <form action="/" class="d-flex" method="POST">
+            <input type="text" name="title" class="form-control" placeholder="enter todo">
+            <input type="submit" value="add-todo" class="btn btn-md btn-primary">
+        </form>
+        <ul class="list-group mt-5">
+            <% todos.forEach(item=> { %>
+                <li class="list-group-item">
+                    <%= item.title %> | <%= item.createdAt.toDateString()%> <a href="/<%= item.id %> ">Delete</a>
+
+
+                </li>
+                <% }) %>
+        </ul>
+    </div>
+    <%- include('./partials/footer') %>
