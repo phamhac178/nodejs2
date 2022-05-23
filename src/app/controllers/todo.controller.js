@@ -9,7 +9,7 @@ class todocontroller {
     //     res.render("todo", { todos });
     // }
     async todocreate(req, res) {
-        // console.log(req.body);
+        console.log(req.body);
         // const todo = await Todo.create(req.body);
         res.redirect("/");
     }
@@ -26,9 +26,7 @@ class todocontroller {
         res.redirect("/");
     }
 
-    login(req,res){
-        res.render("index");
-    }
+    
 }
 // exports.createTodo =async (req, res)=>{
 //     const todo = await Todo.create(req.body);
