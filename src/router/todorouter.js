@@ -7,15 +7,20 @@ const userController = require("../app/controllers/user.controller");
 router.route("/").get(userController.login);
 router.route("/login").post(userController.onLogin);
 
-
 router.route("/register").get(userController.register);
 router.route("/register").post(userController.registerSubmit);
 
 router.route("/logout").get(userController.logout);
 
 router.route("/list").get(todoController.todo);
+// tạo
 router.route("/create").post(todoController.todocreate);
+// xóa
 router.route("/delete/:id").get(todoController.deleteTodo);
-router.route("/update").post(todoController.todoupdate);
+// sửa
+router
+    .route("/update/:id")
+    .get(todoController.getUpdate)
+    .post(todoController.todoupdate);
 
 module.exports = router;

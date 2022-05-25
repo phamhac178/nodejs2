@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <%- include('./partials/header') %>
+  <%- include('./partials/header') %>
 </head>
+
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Home </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Add todo<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="/logout">Log out<span class="sr-only">(current)</span></a>
-            </li>
-            
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-        </div>
-      </nav>
-    <div class="container mt-5">
-        <form action="/create" class="d-flex" method="POST">
-            <input type="text" name="title" class="form-control" placeholder="Thêm công việc cần phải làm">
-            <input type="date" name="date" class="form-control" placeholder="">
-            <input type="submit" value="add-todo" class="btn btn-md btn-primary">
-        </form>
-        <ul class="list-group mt-5">
-            <% todos.forEach(item=> { %>
-                <li class="list-group-item">
-                    <%= item.title %> | <%=  item.userId %> <a href="/delete/<%= item.id %> ">Delete</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Home </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Add todo<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="/logout">Log out<span class="sr-only">(current)</span></a>
+        </li>
 
-                </li>
-                <% }) %>
-        </ul>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </div>
-<%- include('./partials/footer') %>
+  </nav>
+  <div class="container mt-5">
+    <form action="/create" class="d-flex" method="POST">
+      <input type="text" name="title" class="form-control" placeholder="Thêm công việc cần phải làm">
+      <input type="date" name="date" class="form-control" placeholder="">
+      <input type="submit" value="add-todo" class="btn btn-md btn-primary">
+    </form>
+    <ul class="list-group mt-5">
+      <% todos.forEach(item=> { %>
+        <li class="list-group-item">
+          <%= item.title %> | <%= item.id %> <a href="/delete/<%= item.id %> ">Delete</a> <a
+                href="/update/<%= item.id %> ">update</a>
+        </li>
+        <% }) %>
+    </ul>
+  </div>
+  <%- include('./partials/footer') %>
 
 </body>
+
 </html>
