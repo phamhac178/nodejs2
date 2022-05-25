@@ -11,7 +11,7 @@
        <% if ( typeof errorMsg != 'undefined') {  %>
               <h4 class="text-danger"> <%= errorMsg %> </h4>
         <% } %>
-        <form class="form" action="/register" method="post">
+        <form id="signup-form" class="form" action="/register" method="post">
             <div class="form-group">
                 <label for="">User Name</label>
                 <input type="text" name="userName" id="userName" placeholder="user name" required class="form-control">
@@ -23,18 +23,66 @@
             <div class="form-group">
                 <label for="">Password Again</label>
                 <input type="password" id="re_password" placeholder="nhập lại mật khẩu" required class="form-control">
+                <p class="" id="rePass-error-message"></p>
             </div>
             <div class="form-group">
-               
-               <button class="btn btn-success " type="submit">Đăng ký</button>
+                <p class="" id="submit-message"></p>
+               <button class="btn btn-success " id="submit-btn" type="button">Đăng ký</button>
             </div>
 
         </form>
     </div>
 <%- include('./partials/footer') %>
- <script>
+            <script>
+                
 
 
- </script>
+
+
+            let pass = document.getElementById('password');
+            let rePass = document.getElementById('re_password');
+            let submitButton = document.getElementById('submit-btn');
+            let rpErrorMsg = document.getElementById('rePass-error-message');
+            let submitMsg = document.getElementById('submit-message');
+            let signup_form = document.getElementById('signup-form');
+
+            let check_re_pass = false;
+
+
+
+
+            rePass.addEventListener('input', (e) => {
+            
+            if(e.target.value == pass.value){
+
+            check_re_pass = true
+            rpErrorMsg.innerText = "Mật khẩu chính xác";
+            rpErrorMsg.style.color = '#28a745';
+            }else {
+
+            check_re_pass = false
+            rpErrorMsg.innerText = "Mật khẩu chưa chính xác";
+            rpErrorMsg.style.color = '#bd2130';
+            }
+
+            })
+
+            submitButton.addEventListener('click', (e) => {
+
+
+
+            if(check_re_pass == true){
+            signup_form.submit();
+            }else{
+            submitMsg.innerText="Vui lòng kiểm tra lại!";
+            submitMsg.style.color ='#bd2130';
+            }
+            })
+
+
+
+
+
+            </script>
 </body>
 </html>

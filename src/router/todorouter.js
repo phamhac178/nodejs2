@@ -5,6 +5,9 @@ const todoController = require("../app/controllers/todo.controller");
 const userController = require("../app/controllers/user.controller");
 
 router.route("/").get(userController.login);
+router.route("/login").post(userController.onLogin);
+
+
 router.route("/register").get(userController.register);
 router.route("/register").post(userController.registerSubmit);
 

@@ -6,6 +6,18 @@ class UserController {
     login(req,res){
         res.render("index");
     }
+    async onLogin(req,res){
+        var query = req.body;
+        var result = await userModel.find(query);
+       if(result.length == 0){
+
+       }else{
+        res.redirect('/list');
+       }
+        
+        
+       
+    }
 
     register(req,res){
         res.render('register');
@@ -16,10 +28,10 @@ class UserController {
         var result = await userModel.find(query);
 
         if(result.length == 0){
-            console.log(req.body)
+           
              const obj = await userModel.create(req.body);
              let userName = req.body.userName;
-             console.log('ddawng ky thanh cong');
+            
              res.render('index',{userName});
         }else{
            
