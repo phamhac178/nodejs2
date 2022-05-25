@@ -7,13 +7,19 @@ const app = express();
 const port = 3000;
 const route = require('./router')
 const db = require('../config/db/index');
-
+const sessions = require('express-session');
 
 app.use(express.urlencoded({
   extended: false,
 }));
 app.use(express.json());
 
+app.use(sessions({
+  secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+  saveUninitialized:true,
+  resave: false ,
+
+}));
 
 // connect to db
 db.connect();

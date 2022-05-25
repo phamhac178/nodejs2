@@ -19,6 +19,11 @@
              } %>
         <form class="form" action="/login" method="post">
             <div class="form-group">
+                <% if(typeof errorMsg != 'undefined'){ %> 
+                    <h5 class="text-danger"> <%= errorMsg %> </h5>
+                    <% } %>
+            </div>
+            <div class="form-group">
                 <label for="">User Name</label>
                 <input type="text" name="userName" placeholder="user name"  required class="form-control" >
             </div>
@@ -26,8 +31,9 @@
                 <label for="">Password</label>
                 <input type="password" name="password" placeholder="password" required class="form-control">
             </div>
-            <div class="form-group">
-               <button class="btn btn-primary">Đăng nhập</button>
+            <div class="form-group row">
+               <button type="submit" class="btn btn-primary mr-3" >Đăng nhập</button>
+               <a href="/register"><button type="button" class="btn btn-primary">Đăng ký</button></a>
             </div>
 
         </form>

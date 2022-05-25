@@ -8,13 +8,14 @@ const todoList = new Schema({
     },
     status: {
         type: Boolean,
+        default: 0
     },
-    createdAt: {
+    date: {
         type: Date,
-        default: Date.now(),
+       
     },
     userId: {
-        type: Number,
+        type: String,
     }
 });
 const Todo = mongoose.model("todoList", todoList);

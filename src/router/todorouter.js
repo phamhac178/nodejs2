@@ -11,7 +11,7 @@ router.route("/login").post(userController.onLogin);
 router.route("/register").get(userController.register);
 router.route("/register").post(userController.registerSubmit);
 
-
+router.route("/logout").get(userController.logout);
 
 router.route("/list").get(todoController.todo);
 router.route("/create").post(todoController.todocreate);

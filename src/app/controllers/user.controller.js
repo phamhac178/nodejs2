@@ -1,22 +1,33 @@
+const req = require("express/lib/request");
 const userModel = require("../../../models/userModel");
+
 class UserController {
     
     
 
     login(req,res){
+        
         res.render("index");
     }
     async onLogin(req,res){
         var query = req.body;
         var result = await userModel.find(query);
        if(result.length == 0){
-
+            var errorMsg = 'Vui lòng kiểm tra lại thông tin đăng nhập !';
+            res.render('index', {errorMsg});
        }else{
+        
+        req.session.userId = result[0]._id.toString();
         res.redirect('/list');
        }
         
         
        
+    }
+
+    logout(req,res){
+        req.session.destroy();
+        res.redirect("/");
     }
 
     register(req,res){
