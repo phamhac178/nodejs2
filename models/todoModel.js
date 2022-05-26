@@ -10,9 +10,12 @@ const todoList = new Schema({
         type: Boolean,
         default: 0
     },
-    date: {
-        type: Date,
+    begin: {
+        type: String,
        
+    },
+    end:{
+        type:String
     },
     userId: {
         type: String,

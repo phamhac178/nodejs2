@@ -13,42 +13,69 @@ class todocontroller {
     //     const todos = await Todo.find({ isRemove: true });
     //     res.render("todo", { todos });
     // }
+    
     async todocreate(req, res) {
-        console.log(req.body.date);
-        let obj = {
-            title: req.body.title,
-            status: 0,
-            date: req.body.date,
-            userId: req.session.userId,
-        };
-        const todo = await Todo.create(obj);
-        res.redirect("/list");
+        if (req.session.userId) {
+            var beginDate = req.body.begin.replace('T',' ');
+            var d = new Date(beginDate);
+            console.log(d)
+            var endDate = req.body.end.replace('T',' ');
+            let obj = {
+                title: req.body.title,
+                status: 0,
+                begin: beginDate,
+                end : endDate,
+                userId: req.session.userId,
+            };
+            console.log(obj)
+            const todo = await Todo.create(obj);
+            res.redirect("/list");
+        } else {
+            res.redirect("/");
+        }
+        
     }
     async deleteTodo(req, res) {
-        const todo = await Todo.findByIdAndDelete(req.params.id);
+        if (req.session.userId) {
+            const todo = await Todo.findByIdAndDelete(req.params.id);
         res.redirect("/list");
+        } else {
+            res.redirect("/");
+        }
+        
     }
     // sửa
 
     // lấy view update
     async getUpdate(req, res, next) {
-        const todo = await Todo.findById(req.params.id);
-        console.log(todo);
-        res.render("update", { todo });
+        if (req.session.userId) {
+            const todo = await Todo.findById(req.params.id);
+            todo.begin = todo.begin.replace(' ','T');
+            todo.end = todo.end.replace(' ','T');
+            res.render("update", { todo });
+        } else {
+            res.redirect("/");
+        }
+        
     }
     async todoupdate(req, res, next) {
-        const todos = await Todo.find();
-        const data = {
-            title: req.body.title,
-            date: req.body.date,
-        };
+        if (req.session.userId) {
+            const todos = await Todo.find();
+            const b = req.body.begin.replace('T',' ' );
+            const e = req.body.end.replace('T',' ' );
+            const data = {
+                title: req.body.title,
+                begin: b,
+                end : e,
+                status: req.body.status
+            };
         console.log(data);
-        await Todo.findByIdAndUpdate(req.params.id, data, function (err, raw) {
-            if (err) {
-                res.send(err);
-            }
-            res.redirect("/list");
-        });
+        const result = await Todo.findByIdAndUpdate(req.params.id, data);
+        res.redirect("/list");
+        } else {
+            res.redirect("/");
+        }
+        
     }
 }
 // exports.createTodo =async (req,   res)=>{
