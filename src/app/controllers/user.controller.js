@@ -10,15 +10,24 @@ class UserController {
         res.render("index");
     }
     async onLogin(req,res){
-        var query = req.body;
+        var query = {userName: req.body.userName};
         var result = await userModel.find(query);
+        console.log(result)
        if(result.length == 0){
-            var errorMsg = 'Vui lòng kiểm tra lại thông tin đăng nhập !';
+            var errorMsg = 'Tài khoản ' + req.body.userName + ' không tồn tại';
             res.render('index', {errorMsg});
        }else{
+            
+            if(result[0].password == req.body.password){
+                req.session.userId = result[0]._id.toString();
+                req.session.userName = result[0].userName;
+                res.redirect('/list');
+            }else{
+                var errorMsg = 'Sai mật khẩu';
+                res.render('index', {errorMsg});
+            }
+
         
-        req.session.userId = result[0]._id.toString();
-        res.redirect('/list');
        }
         
         

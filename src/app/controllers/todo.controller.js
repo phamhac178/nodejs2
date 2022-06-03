@@ -4,7 +4,7 @@ class todocontroller {
         if (req.session.userId) {
             var query = { userId: req.session.userId };
             const todos = await Todo.find(query);
-            res.render("todo", { todos });
+            res.render("todo", { todos, userName: req.session.userName });
         } else {
             res.redirect("/");
         }
